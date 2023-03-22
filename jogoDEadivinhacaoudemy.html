@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jogo de Adivinhação</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h1>Jogo de Adivinhação</h1>
+	<p>Eu estou pensando em um número entre 1 e 100. Tente adivinhar!</p>
+	<input type="text" id="palpite">
+	<button onclick="verificar()">Enviar</button>
+	<button onclick="reiniciar()">Reiniciar</button>
+	<p id="resultado"></p>
+	<p>Tentativas: <span id="tentativas">0</span></p>
+
+	<script>
+		var numero = Math.floor(Math.random() * 100) + 1;
+		var tentativas = 0;
+
+		function verificar() {
+			var palpite = parseInt(document.getElementById("palpite").value);
+			if (isNaN(palpite) || palpite < 1 || palpite > 100) {
+				alert("Por favor, digite um número entre 1 e 100.");
+			} else {
+				tentativas++;
+				document.getElementById("tentativas").innerHTML = tentativas;
+				if (palpite == numero) {
+					document.getElementById("resultado").innerHTML = "Parabéns! Você acertou em " + tentativas + " tentativas.";
+				} else if (palpite < numero) {
+					document.getElementById("resultado").innerHTML = "Muito baixo. Tente novamente.";
+				} else {
+					document.getElementById("resultado").innerHTML = "Muito alto. Tente novamente.";
+				}
+			}
+		}
+
+		function reiniciar() {
+			numero = Math.floor(Math.random() * 100) + 1;
+			tentativas = 0;
+			document.getElementById("resultado").innerHTML = "";
+			document.getElementById("tentativas").innerHTML = "0";
+			document.getElementById("palpite").value = "";
+		}
+	</script>
+</body>
+</html>
